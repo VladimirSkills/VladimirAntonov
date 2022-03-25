@@ -4,10 +4,10 @@
 
 ## статика по Git
 <p align='center'>
-   <a href="https://github-readme-stats.vercel.app/api?username=VladimirSkills&show_icons=true&count_private=true">
-       <img height=150 src="https://github-readme-stats.vercel.app/api?username=VladimirSkills&show_icons=true&count_private=true"/></a>
+   <a href="https://github-readme-stats.vercel.app/api?username=VladimirSkills&theme=algolia&show_icons=true&count_private=true">
+       <img height=150 src="https://github-readme-stats.vercel.app/api?username=VladimirSkills&theme=algolia&show_icons=true&count_private=true"/></a>
    <a href="https://github.com/VladimirSkills/github-readme-stats">
-       <img height=150 src="https://github-readme-stats.vercel.app/api/top-langs/?username=VladimirSkills&layout=compact"/></a>
+       <img height=150 src="https://github-readme-stats.vercel.app/api/top-langs/?username=VladimirSkills&theme=algolia&layout=compact"/></a>
 </p>
 
 ## счётчик
