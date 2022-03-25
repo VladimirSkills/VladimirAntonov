@@ -2,9 +2,9 @@
 ## I'm glad to welcome you!
 <table><tr>
 <td><img src="https://github.com/VladimirSkills/PrivateRepMy/raw/master/Kolobok2.gif" width="100" height="125"></td>
-<td>Владимир Антонов
+<td><strong>Владимир Антонов</strong>
 <br>Родился 4 февраля 1981
-<br>Контакты:
+<br><strong>Контакты:</strong>
 <br>Antonov21vek@mail.ru
 <br>+7 (927) 906-89-07
 <br><a href = "http://linkedin.com/in/vladimir-antonov-b63940235" target="_blank" style="color:#ffff00; title ="LinkedIn">LinkedIn</a>
