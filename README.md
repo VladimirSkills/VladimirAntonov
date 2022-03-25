@@ -1,5 +1,6 @@
 # VladimirAntonov
 ## I'm glad to welcome you!
+<Html>
 <table><tr>
 <td><img src="https://github.com/VladimirSkills/PrivateRepMy/raw/master/Kolobok2.gif" width="100" height="125"></td>
 <td><strong>Владимир Антонов</strong>
@@ -15,6 +16,7 @@
 </td>
 </tr>
 </table>
+</Html>
 
 ## Навыки:
 Есть опыт в создании WEB-страниц и сайтов на основе HTML и CSS, форума на основе phpBB;
