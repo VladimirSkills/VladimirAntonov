@@ -1,6 +1,6 @@
 # VladimirAntonov
 ## I'm glad to welcome you!
-<br><img src="http://yaveryu.ru/images/Kolobok.jpg" width="100" height="125">
+<br><img src="https://github.com/VladimirSkills/PrivateRepMy/raw/master/Kolobok2.gif" width="100" height="125">
 
 ## статика по Git
 <p align='center'>
