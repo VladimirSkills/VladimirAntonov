@@ -1,7 +1,16 @@
 # VladimirAntonov
 ## I'm glad to welcome you!
-<br><img src="https://github.com/VladimirSkills/PrivateRepMy/raw/master/Kolobok2.gif" width="100" height="125">
-
+<table><tr>
+<td><img src="https://github.com/VladimirSkills/PrivateRepMy/raw/master/Kolobok2.gif" width="100" height="125"></td>
+<td>Владимир Антонов
+<br>Родился 4 февраля 1981
+<br>Контакты:
+<br>Antonov21vek@mail.ru
+<br>+7 (927) 906-89-07
+<br><a href = "http://linkedin.com/in/vladimir-antonov-b63940235" target="_blank" style="color:#ffff00; title ="LinkedIn">LinkedIn</a>
+</td>
+</tr>
+</table>
 
 ## Навыки:
 Есть опыт в создании WEB-страниц и сайтов на основе HTML и CSS, форума на основе phpBB;
@@ -68,10 +77,10 @@ QlikView
 
 
 <p align='center'>
-   <a href="https://github-readme-stats.vercel.app/api?username=VladimirSkills&theme=algolia&show_icons=true&count_private=true">
-       <img height=150 src="https://github-readme-stats.vercel.app/api?username=VladimirSkills&theme=algolia&show_icons=true&count_private=true"/></a>
+   <a href="https://github-readme-stats.vercel.app/api?username=VladimirSkills&theme=dark&show_icons=true&count_private=true">
+       <img height=150 src="https://github-readme-stats.vercel.app/api?username=VladimirSkills&theme=dark&show_icons=true&count_private=true"/></a>
    <a href="https://github.com/VladimirSkills/github-readme-stats">
-       <img height=150 src="https://github-readme-stats.vercel.app/api/top-langs/?username=VladimirSkills&theme=algolia&layout=compact"/></a>
+       <img height=150 src="https://github-readme-stats.vercel.app/api/top-langs/?username=VladimirSkills&theme=dark&layout=compact"/></a>
 </p>
 
 <div align="center" style="margin: 40px 0">
