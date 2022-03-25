@@ -4,7 +4,7 @@
 
 
 <div align="center" style="margin: 40px 0">
-   <a href="https://github.com/romankh3/github-profile-views-counter">
+   <a href="https://vladimirskills.github.io/VladimirAntonov/">
        <img width="175px" src="https://komarev.com/ghpvc/?username=VladimirSkills&color=DE002D">
    </a>
 </div>
