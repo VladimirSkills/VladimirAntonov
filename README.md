@@ -1,6 +1,6 @@
 # VladimirAntonov
 ## I'm glad to welcome you!
-<br><img src="https://i.pinimg.com/564x/ff/cd/a1/ffcda1ddf83fe41924b1481d0ad1ccee.jpg" width="100" height="125">
+<br><img src="http://yaveryu.ru/images/%D0%9A%D0%BE%D0%BB%D0%BE%D0%B1%D0%BE%D0%BA-2.gif" width="100" height="125">
 
 ## статика по Git
 <p align='center'>
