@@ -59,15 +59,14 @@ QlikView
 Возможны редкие командировки. Живу в Самаре, но хочу выйти и на рынок других регионов. Предпочтение отдаю удалённой работе (Freelancer), но также рассматриваю предложения по работе в штате. Могу заниматься, как индивидуальными проектами, так и работать в команде.
 
 ## Образование:
-# 2009
+### 2009
 Международный институт рынка, г.Самара
 Оценка бизнеса/Оценщик, Диплом с отличием: "Оценка неконтрольного пакета акций кредитно-финансового учреждения"
-# 2003
+### 2003
 Самарский государственный экономический университет
 Финансово-экономический/Экономист, Диплом с отличием: "Финансово-экономическое состояние и перспективы развития ЗАО "СПЗ-4"
 
 
-## статика по Git
 <p align='center'>
    <a href="https://github-readme-stats.vercel.app/api?username=VladimirSkills&theme=algolia&show_icons=true&count_private=true">
        <img height=150 src="https://github-readme-stats.vercel.app/api?username=VladimirSkills&theme=algolia&show_icons=true&count_private=true"/></a>
@@ -75,7 +74,6 @@ QlikView
        <img height=150 src="https://github-readme-stats.vercel.app/api/top-langs/?username=VladimirSkills&theme=algolia&layout=compact"/></a>
 </p>
 
-## счётчик
 <div align="center" style="margin: 40px 0">
    <a href="https://vladimirskills.github.io/VladimirAntonov/">
        <img width="175px" src="https://komarev.com/ghpvc/?username=VladimirSkills&color=DE002D">
