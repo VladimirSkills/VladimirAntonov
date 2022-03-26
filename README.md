@@ -2,7 +2,7 @@
 ## I'm glad to welcome you!
 <Html>
 <table><tr>
-<td><img src="https://github.com/VladimirSkills/PrivateRepMy/blob/master/Icon.jpg" width="115" height="125"></td>
+<td><img src="https://github.com/VladimirSkills/VladimirAntonov/raw/master/IconMe.jpg" width="115" height="125"></td>
 <td>Родился 4 февраля 1981
 <br><strong>Контакты:</strong>
 <br>+7 (927) 906-89-07
