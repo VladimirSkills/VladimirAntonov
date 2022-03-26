@@ -13,10 +13,7 @@
   <form action="https://drive.google.com/drive/folders/0B_MHbLCvsA_XYXBaU1pHRW5KQ28?resourcekey=0-aen7H6Dp0JreUM5d0rY30A&usp=sharing" target="_blank" title ="Portfolio на Google Диске">
     <button><strong>ПОРТФОЛИО</strong></button>
   </form>
-</td>
-</tr>
-</table>
- 
+<br><!--Переводчик Google-->
 <div id="google_translate_element"></div>
 <script type="text/javascript">
 function googleTranslateElementInit() {
@@ -24,6 +21,10 @@ function googleTranslateElementInit() {
 }
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</td>
+</tr>
+</table>
+
 </Html>
 
 ## Опыт:
