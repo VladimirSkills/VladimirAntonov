@@ -9,9 +9,9 @@
 <br><a href = "http://linkedin.com/in/vladimir-antonov-b63940235" target="_blank">LinkedIn</a>
 <br><a href = "https://samara.hh.ru/resume/d53ad870ff09cb18e60039ed1f414c79766e41" target="_blank">HeadHunter</a>
 </td>
-<td>
+<td style="vertical-align:top;">
   <form action="https://drive.google.com/drive/folders/0B_MHbLCvsA_XYXBaU1pHRW5KQ28?resourcekey=0-aen7H6Dp0JreUM5d0rY30A&usp=sharing" target="_blank" title ="Portfolio на Google Диске">
-  <button><strong>ПОРТФОЛИО</strong></button>
+    <button><strong>ПОРТФОЛИО</strong></button>
   </form>
 </td>
 </tr>
