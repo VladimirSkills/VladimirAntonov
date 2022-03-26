@@ -2,7 +2,7 @@
 ## I'm glad to welcome you!
 <Html>
 <table><tr>
-<td><img src="https://github.com/VladimirSkills/PrivateRepMy/raw/master/Kolobok2.gif" width="100" height="125"></td>
+<td><img src="http://yaveryu.ru/images/IconMe.jpg" width="115" height="125"></td>
 <td>Родился 4 февраля 1981
 <br><strong>Контакты:</strong>
 <br>+7 (927) 906-89-07
