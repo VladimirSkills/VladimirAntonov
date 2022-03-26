@@ -11,7 +11,7 @@
 </td>
 <td>
   <form action="https://drive.google.com/drive/folders/0B_MHbLCvsA_XYXBaU1pHRW5KQ28?resourcekey=0-aen7H6Dp0JreUM5d0rY30A&usp=sharing" target="_blank" title ="Portfolio на Google Диске">
-  <button>&#128194 <strong>ПОРТФОЛИО</strong></button>
+  <button><strong>ПОРТФОЛИО</strong></button>
   </form>
 </td>
 </tr>
