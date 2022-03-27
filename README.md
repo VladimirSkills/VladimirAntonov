@@ -93,6 +93,7 @@ HR-бюджет: планирование, обоснование и контр�
 
 Бюджетирование и финансовое планирование. АФХД. Контроль операционных расходов. Оплата счетов. Инвентаризационный учёт инструментов на складе.
 
+
 <p align='center'>
    <a href="https://github-readme-stats.vercel.app/api?username=VladimirSkills&theme=dark&show_icons=true&count_private=true">
        <img height=150 src="https://github-readme-stats.vercel.app/api?username=VladimirSkills&theme=dark&show_icons=true&count_private=true"/></a>
