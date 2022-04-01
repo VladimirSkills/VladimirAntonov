@@ -6,7 +6,8 @@
 <td>41 год, 4 фев 1981
 <br><strong>Контакты:</strong>
 <br>+7 (927) 906-89-07
-<br><a href = "http://linkedin.com/in/vladimir-antonov-b63940235" target="_blank">LinkedIn</a>
+<p>Antonov21vek@mail.ru</p>
+<a href = "http://linkedin.com/in/vladimir-antonov-b63940235" target="_blank">LinkedIn</a>
 <br><a href = "https://samara.hh.ru/resume/d53ad870ff09cb18e60039ed1f414c79766e41" target="_blank">HeadHunter</a>
 </td>
 <td valign=top>
@@ -21,7 +22,6 @@ function googleTranslateElementInit() {
 }
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<p>Antonov21vek@mail.ru</p>
 </td>
 </tr>
 </table>
