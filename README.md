@@ -6,8 +6,9 @@
 <td>41 год, 4 фев 1981
 <br><strong>Контакты:</strong>
 <br>+7 (927) 906-89-07
-<p>Antonov21vek@mail.ru</p>
-<a href = "http://linkedin.com/in/vladimir-antonov-b63940235" target="_blank">LinkedIn</a>
+<br>Antonov21vek@mail.ru
+<br><a href = "https://antonov21vek.ru/">My Site</a>
+<br><a href = "http://linkedin.com/in/vladimir-antonov-b63940235" target="_blank">LinkedIn</a>
 <br><a href = "https://samara.hh.ru/resume/d53ad870ff09cb18e60039ed1f414c79766e41" target="_blank">HeadHunter</a>
 </td>
 <td valign=top>
