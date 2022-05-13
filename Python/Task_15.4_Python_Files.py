@@ -39,3 +39,88 @@ print(f'2-ое слово: "{max(sorted_res, key=(sorted_res.get))}" - {max(sort
 
 print(f'Самое длинное англ. слово: "{max(longWord(lst), key=len)}"')
 print(f'Самое длинное русское: "{", ".join([word for word in lst if len(word) == len(sorted(lst, key=len)[-1])]).lower()}"')
+
+
+
+
+"""
+Задание на автоматизацию проверки ответа API от сервера. 
+Нужно написать простой тест, который проверяет JSON на правильность полей:
+-Содержит все перечисленные в требованиях поля.
+-Не имеет других полей.
+-Все поля имеют именно тот тип, который указан в требованиях. 
+Тест должен вернуть Pass или список значений, которые тест посчитал ошибочными, и причину, почему они ошибочные.
+исходник: Json 15.4.2.json
+"""
+
+import json
+
+with open('Json 15.4.2.json', encoding='utf8') as f:
+    templates = json.load(f)
+
+def CheckInt(item):
+    return isinstance(item, int)
+
+def CheckStr(item):
+    return isinstance(item, str)
+
+def CheckBool(item):
+    return isinstance(item, bool)
+
+def CheckUrl(item):
+    if isinstance(item, str):
+        return item.startswith('http://') or item.startswith('https://')
+    else:
+        return False
+
+def CheckStrValue(item, val):
+    if isinstance(item, str):
+        return item in val
+    else:
+        return False
+
+def ErrorLog(item, value, string):
+    Error.append({item: f'{value}, {string}'})
+
+ListOfItems = {'timestamp': 'int', 'referer': 'url', 'location': 'url',
+               'remoteHost': 'str', 'partyId': 'str', 'sessionId': 'str',
+               'pageViewId': 'str', 'eventType': 'val', 'item_id': 'str',
+               'item_price': 'int', 'item_url': 'url', 'basket_price': 'str',
+               'detectedDuplicate': 'bool', 'detectedCorruption': 'bool',
+               'firstInSession': 'bool', 'userAgentName': 'str'}
+Error = []
+for items in templates:
+    for item in items:
+        if item in ListOfItems:
+            if ListOfItems[item] == 'int':
+                if not CheckInt(items[item]):
+                    ErrorLog(item, items[item], f'ожидали тип {ListOfItems[item]}')
+            elif ListOfItems[item] == 'str':
+                if not CheckStr(items[item]):
+                    ErrorLog(item, items[item], f'ожидали тип {ListOfItems[item]}')
+            elif ListOfItems[item] == 'bool':
+                if not CheckBool(items[item]):
+                    ErrorLog(item, items[item], f'ожидали тип {ListOfItems[item]}')
+            elif ListOfItems[item] == 'url':
+                if not CheckUrl(items[item]):
+                    ErrorLog(item, items[item], f'ожидали тип {ListOfItems[item]}')
+            elif ListOfItems[item] == 'val':
+                if not CheckStrValue(items[item], ['itemBuyEvent', 'itemViewEvent']):
+                    ErrorLog(item, items[item], 'ожидали значение itemBuyEvent или itemViewEvent')
+            else:
+                ErrorLog(item, items[item], 'неожиданное значение')
+        else:
+            ErrorLog(item, items[item], 'неизвестная переменная')
+if Error == []:
+    print('Pass')
+else:
+    print('Fail')
+    print(Error)
+
+with open('Json 15.4.2_unload.json', 'w', encoding='utf8') as f:
+    json.dump(templates, f, ensure_ascii=False, indent=4)
+
+with open('Json 15.4.2_unload.json', encoding='utf8') as f:
+    print(f.read())
+
+
