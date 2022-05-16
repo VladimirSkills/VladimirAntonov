@@ -9,7 +9,10 @@ class Rectangle:
 
 class Square:
     def __init__(self, a):
-        self.a = a
+        if a <= 0:
+            raise NonPositiveDigitException('Неверно указана сторона квадрата!')
+        else:
+            self.a = a
     def get_area_square(self):
         return self.a ** 2
 
@@ -20,3 +23,7 @@ class Circle:
         p = math.pi
         return round(p * self.r ** 2, 2)
     p = math.pi # для вывода числа Pi через класс Circle.p
+
+class NonPositiveDigitException(ValueError):
+    pass
+

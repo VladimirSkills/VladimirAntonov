@@ -13,6 +13,7 @@ square_2 = Square(10)
 circle_1 = Circle(7)
 
 figures = [rect_1, rect_2, square_1, square_2, circle_1]
+#print(square_1.get_area_square())
 
 for figure in figures:
     if isinstance(figure, Square):
