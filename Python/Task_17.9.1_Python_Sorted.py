@@ -44,8 +44,7 @@ def double_search(sortA, element, left, right):
     if left > right:  # если левая граница превысила правую,
         return False  # значит элемент отсутствует
 
-    middle = (right + left) // 2  # находимо середину
-    #print(middle)
+    middle = (right + left) // 2  # находим середину
     if element == sortA[middle]:  # если элемент в середине,
         return middle  # возвращаем этот индекс
     elif element < sortA[middle]:  # если элемент меньше элемента в середине
