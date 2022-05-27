@@ -56,7 +56,6 @@ def double_search(sortA, element, left, right):
 element = min(b) # переводим в формат числа
 idx = double_search(sortA, element, 0, len(sortA))
 
-print(f"Последний индекс в списке: {len(sortA)-1}")
 # Обработка исключения при вводе значения = мин или макс в списке:
 if element == max(sortA):
     Pidx = idx
@@ -64,6 +63,8 @@ elif element == min(sortA):
     Pidx = "- не определён, так как введённое число минимальное"
 else:
     Pidx = idx - 1
+
+print(f"Последний индекс в списке: {len(sortA)-1}")
 print(f"Предшествующий числу {element} индекс:", Pidx)
 
 # Укажите произвольный набор чисел через запятую: 25,45,6,8,54,10,65,88,70,3,56,4,80,95,2
