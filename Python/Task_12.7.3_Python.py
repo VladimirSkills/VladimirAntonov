@@ -21,3 +21,14 @@ print("Money =", money, "руб.")
 print("Bank =", (', '.join(per_cent.keys())))
 print("Deposit =", deposit)
 print("Максимальная сумма, которую вы можете заработать —", max(deposit), "руб.")
+
+print("\nИЛИ ЭДАК:")
+j = per_cent.items()
+for i in per_cent:
+    p = round(per_cent[i] / 100 * money)
+    for j in per_cent:
+        if j == i:
+            print(f'Доход {int(p)} по ставке {per_cent.get(i)}% в банке: {j}')
+maxi = round(max(per_cent.values()) / 100 * money)
+bank = max(per_cent, key=per_cent.get)
+print(f'<<Лучшее предложение>> в банке {bank} с доходом: {maxi}')
