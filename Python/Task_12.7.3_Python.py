@@ -4,10 +4,10 @@
 — накопленные средства за год вклада в каждом из банков. На вход программы с клавиатуры
 вводится сумма money ~ 100 000, которую человек планирует положить под проценты.
 Добавьте в программу поиск максимального значения и его вывод на экран."""
-import decimal
+from decimal import Decimal, ROUND_HALF_UP
 
-per_cent = {'ТКБ': 5.6, 'СКБ': 5.9, 'ВТБ': 4.28, 'СБЕР': 4.0}
-money = int(input("Введите сумму вклада в рублях:"))
+per_cent = {'ТКБ': 5.6, 'СКБ': 5.9566, 'ВТБ': 4.2858, 'СБЕР': 4.0}
+money = int(input("Введите сумму вклада в рублях: "))
 b1 = per_cent.get('ТКБ')
 b2 = per_cent.get('СКБ')
 b3 = per_cent.get('ВТБ')
@@ -25,16 +25,17 @@ print("Максимальная сумма, которую вы можете з�
 
 print("\nИЛИ ЭДАК:")
 def num_format(num_x): # числовой формат:
-    n = decimal.Decimal(round(num_x))
-    formi = '{0:,}'.format(n).replace(',', '.')
+    n = Decimal(str(num_x))
+    number = n.quantize(Decimal("1"), ROUND_HALF_UP)
+    formi = '{0:,}'.format(number).replace(',', ' ')
     return formi
 
 j = per_cent.items()
 for i in per_cent:
-    p = round(per_cent[i] / 100 * money)
+    p = per_cent[i] / 100 * money
     for j in per_cent:
         if j == i:
             print(f'Доход {num_format(p)} по ставке {per_cent.get(i)}% в банке: {j}')
-maxi = round(max(per_cent.values()) / 100 * money)
+maxi = max(per_cent.values()) / 100 * money
 bank = max(per_cent, key=per_cent.get)
 print(f'<<Лучшее предложение>> в банке {bank} с доходом: {num_format(maxi)}')
