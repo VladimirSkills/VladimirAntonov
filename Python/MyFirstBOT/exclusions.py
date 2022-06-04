@@ -19,23 +19,23 @@ class CryptoConverter:
     @staticmethod
     def convert(quote: str, base: str, amount: str):
         if quote == base:  # если введены одинаковые валюты:
-            raise ConvertionException(f"Вы ввели одинаковую или некорректную валюту {base}!")
+            raise ConvertionException(f'Вы ввели одинаковую или некорректную валюту "{base}"!')
 
         # Обработка некорректного ввода имени валюты пользователем:
         try:
             quote_ticker = keys[quote]
         except KeyError:  # Ошибка по ключу
-            raise ConvertionException(f"Не удалось обработать валюту {quote}!")
+            raise ConvertionException(f'Не удалось обработать валюту "{quote}"!')
         try:
             base_ticker = keys[base]
         except KeyError:
-            raise ConvertionException(f"Не удалось обработать валюту {base}!")
+            raise ConvertionException(f'Не удалось обработать валюту "{base}"!')
 
         # Обработка некорректного ввода количества конвертируемой валюты - amount:
         try:
             amount = float(amount)
         except ValueError:  # Ошибка по значению
-            raise ConvertionException(f"Не удалось обработать количество {amount}!")
+            raise ConvertionException(f'Не удалось обработать количество "{amount}"!')
 
         # вставляем с сайта запрос и делаем его динамическим, т.е. c изменяемыми переменными {код валюты по ключу}:
         r = requests.get(f"https://min-api.cryptocompare.com/data/price?fsym={quote_ticker}&tsyms={base_ticker}")

@@ -12,4 +12,3 @@ keys = {
 countcy = 0
 for key in keys.keys():
     countcy += 1
-print(countcy)
