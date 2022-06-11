@@ -1,10 +1,12 @@
 ticket = int(input('Укажите кол-во билетов (макс 5 шт): '))
 if 0 < ticket <= 5: # ограничение ввода по количеству
     price = 0
+    count = 0
     for i in range(ticket):
         while True:
             try:
-                age = int(input('Возраст посетителя: '))
+                count += 1
+                age = int(input(f'Возраст {count}-го посетителя: '))
                 # Если вводится не число, будет вызвано исключение:
             except ValueError:
                 # Цикл будет повторяться до правильного ввода:
