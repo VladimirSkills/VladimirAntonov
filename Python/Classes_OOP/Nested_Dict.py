@@ -1,4 +1,4 @@
-# https://pythobyte.com/python-dictionary-get-value-816f3b10/
+"""Online wallet / 16.9"""
 
 clients = {
     "client1": {
@@ -21,10 +21,36 @@ clients = {
         }
 }
 
+class Clients:
+    def __init__(self, name, surname, city, balance):
+        self.name = name
+        self.surname = surname
+        self.city = city
+        self.balance = balance
+    def __str__(self):
+        return f'{self.name} {self.surname}, г.{self.city}, баланс: {self.balance} руб.'
 
+    def guests(self):
+        return f'{self.name} {self.surname}, город: {self.city}'
+
+one = clients["client1"].values()
+print(Clients(*one))
+
+# for key, val in clients.items():
+#     allval = list(val.values())
+#     # print(f'{key}:')
+#     print(Clients(*allval))
+
+print("\nGuests:")
 for key, val in clients.items():
     allval = list(val.values())
-    print(key, *allval)  # выводим клиентов и все значения по нему
+    out = Clients(*allval)
+    print(Clients.guests(out))
+
+
+# for key, val in clients.items():
+#     allval = list(val.values())
+#     print(key, *allval)  # выводим клиентов и все значения по нему
 
 
 # for key, val in clients.items():
