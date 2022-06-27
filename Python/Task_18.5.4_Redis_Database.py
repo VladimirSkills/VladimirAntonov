@@ -5,9 +5,9 @@ import redis
 import json
 
 cache = redis.Redis(
-    host= 'redis-_YOURS_.com',
-    port=_YOURS_,
-    password='_YOURS_'
+    host= 'redis-12059.c52.us-east-1-4.ec2.cloud.redislabs.com',
+    port=12059,
+    password='rNftZEI9Wu6yP5WXl5vqykrk1dC3Jlku'
 )
 
 # ШАГ 1: Создание словаря
@@ -26,6 +26,7 @@ listname = ', '.join(list(map(str, converted_data.keys()))) # делаем чи�
 print(f"Создан список контактов Ваших друзей: {listname}")
 names = input(f'Введите имя друга для получения телефона: ')
 
+# ШАГ 3: Удаление
 print(f"Его телефон: +{converted_data.get(names)}")
 delit = input(f'Удалить контакты? y/n ')
 for i in delit:
