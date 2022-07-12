@@ -13,6 +13,7 @@ tests - папка с файлами в корне проекта,
 test_parametriz.py - название файла с тестами,
 test_triangle - имя тест-функции.
 Другие скрипты для вызова тестов и отчётов: https://docs.pytest.org/en/6.2.x/usage.html
+Full pytest documentation: https://docs.pytest.org/en/7.1.x/contents.html
 """
 
 
@@ -238,16 +239,16 @@ def test_get_api_key(get_api_key_fix):  # в аргументе функции -
 
 """ФИЧА-11. ПРИМЕР ПРИМЕНЕНИЯ ФИКСТУР ДЛЯ КЛАССА"""
 
-# БЛОК SETUP:
+# БЛОК SETUP (код, предшествующий исполнению основной функции)
 # Фикстура для класса работает в паре с: @pytest.mark.usefixtures("имя фикстуры")
 @pytest.fixture()  # если указать scope="class", фикстура исполнится только для первого теста в классе
 # Получение названия выполняемого теста
 def get_name_func_setup(request):
     print("Название теста из класса:", request.node.name)
-    yield
+    yield  # спец. слово, обозначающее исполняемую функцию
 
 
-# БЛОК TEARDOWN:
+# БЛОК TEARDOWN (код, идущий после исполнения основной функции)
 @pytest.fixture(scope="class")
 # Получение времени обработки теста для класса
 def time_delta_teardown(request):
@@ -255,6 +256,14 @@ def time_delta_teardown(request):
     yield
     end_time = time.time_ns()
     print(f"Время теста для класса {request.node.name}: {(end_time - start_time)//1000000}мс")
+
+# ПРИМЕНЧАНИЕ!
+"""Блоки setup и teardown, в классическом представлении, используются внутри одной фикстуры:
+код setup...
+yield...
+код teardown...
+Но возможно разбить их на две фикстуры, как сделано выше... Это, как будет удобно.
+"""
 
 
 """<<<<<< Примеры ТЕСТов для КЛАССОВ >>>>>>>"""
@@ -385,6 +394,7 @@ def test_python_string_slicer(param_fun):
 как есть (без экранирования), нужно прописать в файле pytest.ini следующее:
 [pytest]
 disable_test_id_escaping_and_forfeit_all_rights_to_community_support = True
+Сам файл pytest.ini нужно создать в папке с тестами самостоятельно.
 В итоге мы получим результат теста в читабельном для кириллицы виде:
 """
 # >>> Out print:
@@ -400,12 +410,23 @@ disable_test_id_escaping_and_forfeit_all_rights_to_community_support = True
 @pytest.fixture(autouse=True)
 def fix_api_key():
     """Фикстура для получения ключа в параметризированных тестах"""
-    # Отправляем запрос и сохраняем полученный ответ с кодом статуса в status, а текст ответа в result
+    # Отправляем запрос и сохраняем полученный ответ с кодом статуса в status, а текст ответа в pytest.key:
     status, pytest.key = pf.get_api_key(valid_email, valid_password)
     # Сверяем полученные данные с нашими ожиданиями
     assert status == 200
     assert 'key' in pytest.key
     yield
+
+"""Что это за чудо такое pytest.key? Не смог найти описание этого атрибута, но...
+Это не переменная, но атрибут. Назначается он в фикстуре fix_api_key в качестве атрибута получения токена из 
+API запроса: get_api_key. Если бы эта была переменная, то любое слово, годное в качестве переменной легко смогло бы 
+заменить его при использовании этой переменной в тест-функциях для получения значения токена... 
+Но! Нет, токен вы не получите, если будете использовать любые, отличные от атрибута pytest.key значения!
+Секрет кроется в смысле фикстуры и импорта библиотеки Pytest. Получается, что атрибут key (из pytest.key) 
+в нашей фикстуре fix_api_key получает значение ключа, а приставка pytest транслирует это значение через фикстуру 
+в тест-функцию, где мы указываем атрибут pytest.key вместо auth_key, как это было в тестах без параметризации. 
+Получается, что при параметризации, используя фикстуру для получения ключа, мы должны применять именно атрибут pytest.key.
+"""
 
 # Ниже разберём случай применения атрибута 'pytest.key' и пару новых примочек:
 
@@ -425,14 +446,14 @@ def get_pet_id():
 @pytest.mark.parametrize("pet_id", [get_pet_id()], ids=['valid'])  # в параметрах, через функцию get_pet_id, получаем id
 def test_delete_first_pet(pet_id):
     # Проверяем - если список своих питомцев пустой, пометим тест, как падающий через маркер xfail:
-    _, my_pets, _, _ = pf.get_list_of_pets(pytest.key, "my_pets")
+    _, my_pets, _, _ = pf.get_list_of_pets(pytest.key, "my_pets")  # указываем атрибут pytest.key вместо auth_key
     if len(my_pets['pets']) == 0:
         pytest.xfail("Тест рабочий, возможно просто нет загруженных питомцев.")
     # Берём id питомца из параметра и отправляем запрос на удаление:
     pytest.status, result, content, optional = pf.delete_pet(pytest.key, pet_id)
     # Ещё раз запрашиваем список своих питомцев:
     _, my_pets, _, _ = pf.get_list_of_pets(pytest.key, "my_pets")
-    with open("out_json.json", 'w', encoding='utf8') as my_file:
+    with open("out_json.json", 'w', encoding='utf8') as my_file:  # создаём файл out_json, куда пишем полученные ответы
         my_file.write(str(f"\n{pytest.status}\n{content}\n{optional}\nЗдесь был id питомца:'{result}'\nUser's pets:\n"))
         json.dump(my_pets, my_file, ensure_ascii=False, indent=4)
     # Проверяем что статус ответа равен 200 и в списке питомцев нет id удалённого питомца:
