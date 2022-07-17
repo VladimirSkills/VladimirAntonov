@@ -5,8 +5,6 @@ import json
 
 # Проверка регистрации пользователя:
 def test_registration():
-    """ Проверяем что запрос api ключа возвращает статус 200 и в результате содержится слово key"""
-
     # Отправляем запрос и сохраняем полученный ответ в файл: 'out_json.json':
     status, result, content, optional, data = Register().register_user()
     with open("out_json.json", 'w', encoding='utf8') as my_file:
