@@ -1,3 +1,5 @@
+"""ИНТЕРЕСНЫЕ ФИШКИ ДЛЯ PYTEST"""
+
 from conftest import do_repeat_it, add_file_log  # импортируем декораторы
 from app.settings import valid_email, valid_password
 import inspect  # используем метод для возвращения имени функции
@@ -226,7 +228,7 @@ def time_delta():
 
 @pytest.mark.usefixtures("get_name_func")  # фикстура для вывода в консоли названия теста
 def test_get_api_key(get_api_key_fix):  # в аргументе функции - фикстура для получения ключа
-    result = get_api_key_fix
+    result = get_api_key_fix  # вместо auth_key везде в тест-функции указываем имя фикстуры - get_api_key_fix
     # Сверяем полученные данные с нашими ожиданиями
     assert 'key' in result
 
@@ -257,7 +259,7 @@ def time_delta_teardown(request):
     end_time = time.time_ns()
     print(f"Время теста для класса {request.node.name}: {(end_time - start_time)//1000000}мс")
 
-# ПРИМЕНЧАНИЕ!
+# ПРИМЕЧАНИЕ!
 """Блоки setup и teardown, в классическом представлении, используются внутри одной фикстуры:
 код setup...
 yield...
@@ -286,7 +288,9 @@ class TestDeletePets:
 
 
 
-"""ДЕКОРАТОРЫ / импортируются из файла: conftest.py - в котором они прописываются"""
+"""ДЕКОРАТОРЫ / импортируются из файла: conftest.py - в котором они прописываются...
+from conftest import _имя декоратора_"""
+
 # ФИЧА-12. Теория:
 def do_it_twice(func):  # создаём декоратор
    def wrapper(*args, **kwargs):  # эта функция wrapper выступает, как обёртка/шаблон для декорирования рабочей функции say_word. [*args, **kwargs] - аргументы, которые могут быть в рабочей функции, в данном случае say_word.
@@ -469,3 +473,147 @@ def test_delete_first_pet(pet_id):
                          ids=['empty', 'unexistent', 'remote'])  # and other...
 def test_delete_first_pet_negative(pet_id):
     # ...
+
+
+
+
+"""TESTING ON SELENIUM"""
+
+# https://pytest-selenium.readthedocs.io/en/latest/user_guide.html
+# https://habr.com/ru/company/otus/blog/596071/
+# https://selenium-python.readthedocs.io/api.html
+
+"""
+import logging  # Логгирование. Для вывода ответа в консоли
+logger = logging.getLogger("имя запускаемого файла")  # -> для вывода ответа в консоль
+Также прописываем в файл pytest.ini следующий код для работы метода getLogger:
+[pytest]
+disable_test_id_escaping_and_forfeit_all_rights_to_community_support = True
+log_format = %(asctime)s %(levelname)s %(message)s
+log_date_format = %Y-%m-%d %H:%M:%S
+log_cli=true
+log_level=INFO
+"""
+
+
+import time  # just for demo purposes, do NOT repeat it on real projects!
+import win32clipboard  # для вставки из буфера (нужна установка pywin32)
+
+
+def test_paste_link(selenium):
+    """Тестируем Открытие видео по ссылке, копирование ссылки,
+    вставку ссылки в адресную строку и воспроизведение видео"""
+
+    # Драйвер chromedriver.exe помещаем в папку с тестом: tests
+    # Запуск теста (test_paste_link) из папки, где находится тестовый файл (test_selenium.py):
+    # pytest -v --driver Chrome --driver-path chromedriver.exe test_selenium.py::test_paste_link
+    # Запуск теста из корня проекта. Тестовый файл находится в папке tests:
+    # pytest -v --driver Chrome --driver-path tests\chromedriver.exe tests\test_selenium.py::test_paste_link
+
+    # Открываем страницу Web: (страница теста не приводится, но код рабочий)
+    selenium.get('https://.../')
+    # Разворачиваем окно браузера на весь экран:
+    selenium.maximize_window()
+    time.sleep(1)
+
+    # Нажимаем на скриншот видео, оно открывается в новом окне:
+    selenium.find_element_by_xpath('//div[@id="widget-54966c16-d7bc-331f-85f3-5e3f9ad11460"]//img').click()
+
+    # Активируем открывшуюся вкладку [-1] -> последняя открытая вкладка, [0] - предыдущая:
+    selenium.switch_to.window(selenium.window_handles[-1])  # дескриптор последней открытой вкладки
+
+    # Делаем скрин экрана:
+    selenium.save_screenshot('open_page_video.png')
+    time.sleep(1)
+
+    # Нажимаем на кнопку Copy Link для копирования ссылки на видео:
+    selenium.find_element_by_xpath('//button[@aria-label="Copy link"]').click()
+
+    # Открываем буфер обмена:
+    win32clipboard.OpenClipboard()
+    # Назначаем переменной url значение в буфере:
+    url = win32clipboard.GetClipboardData()
+    # Открываем новую вкладку с указанием адреса из буфера обмена:
+    selenium.execute_script(f"window.open('{url}', '_blank');")
+
+    # Активируем открывшуюся вкладку / дескриптор последней открытой вкладки:
+    selenium.switch_to.window(selenium.window_handles[-1])
+    # Закрываем буфер обмена:
+    win32clipboard.CloseClipboard()
+
+    # Нажимаем на видео для воспроизведения:
+    selenium.find_element_by_xpath('//div[@class="relative-el"]').click()
+    # Нажимаем на кнопку fullscreen:
+    selenium.find_element_by_xpath('//button[@class="control-bar-button video-player-fullscreen-button"]').click()
+    time.sleep(10)  # чутка смотрим кино
+    # Делаем скрин экрана:
+    selenium.save_screenshot('video_playback.png')
+
+
+    # Библиотеки для методов ниже:
+    # from selenium.webdriver import ActionChains
+    # from selenium.webdriver.common.keys import Keys
+
+    # Некоторые действия с текстом: (например, для теста выше в качестве 'element' можно использовать 'selenium')
+    # ActionChains(element).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()  # вставка
+    # ActionChains(element).key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).perform()  # выделение
+    # ActionChains(element).key_down(Keys.BACKSPACE).key_up(Keys.BACKSPACE).perform()  # удаление
+
+    # Два варианта нажатия кнопки Enter: Keys.RETURN / Keys.ENTER
+    #ActionChains(element).key_down(Keys.CONTROL).send_keys(Keys.RETURN).key_up(Keys.CONTROL).perform()
+
+    # Использование TAB для перехода n-раз вперёд или назад по элементам страницы:
+    # for i in range(5):
+        # ActionChains(element).key_down(Keys.SHIFT).send_keys(Keys.TAB).perform()  # TAB назад
+        # ActionChains(element).key_down(Keys.TAB).perform()  # TAB вперёд
+
+
+"""Если к тесту добавить функцию, которая импортирует запрос к API из папки app, например: from app.api import PetFriends,
+то товарищ Selenium будет ругаться:
+ERROR: not found: C:\Users\PC\PycharmProjects\PySelenFix\tests\test_selenium.py::test_petfriends_signUp
+(no name 'C:\\Users\\PC\\PycharmProjects\\PySelenFix\\tests\\test_selenium.py::test_petfriends_signUp' in any of [<Module test_selenium.py>])
+Задачка решается добавлением пустого файла с именем: __init__.py в папку с тестами...
+Это передаёт pytest, что родительский каталог папки это директория с проектом..."""
+
+
+
+"""
+Для случайной генерации данных для регистрации, можно использовать библиотеку faker (нужно установить).
+Каждый вызов метода fake.name() дает другой (случайный) результат. Это потому, что фейкер перенаправляет 
+faker.Generator.method_name() вызовы на faker.Generator.format(method_name).
+"""
+from faker import Faker  # Для генерации случайного email и password для регистрации
+fake = Faker()
+
+class RegisterUser:
+    @staticmethod  # Фикстура создаёт и возвращает новый объект (см. её свойства Ctrl+Mouse). Работает в классе.
+    def random():  # Функция генерирует каждый раз валидные данные
+        name = fake.name()
+        email = fake.email()
+        password = fake.password()
+        return {"name": name, "email": email, "pass": password}
+        # вариант №2: return name, email, password
+
+# примеры вызова из другой функции с классом (часть кода). Для отправки API-запроса:
+data = RegisterUser.random()
+res = requests.post(self.base_url + 'new_user', data=self.data)
+# вариант №2 (для регистрации на сайте):
+name, email, password = RegisterUser.random()
+
+
+
+"""Работа с Cookies в Selenium тестах"""
+import pickle
+# Сохраняем cookie в файл cookies.pkl (после авторизации и входа на сайт) / часть кода:
+with open('cookies.pkl', 'wb') as cookies:  # ('cookies.pkl', 'wb', encoding='utf8')
+    pickle.dump(selenium.get_cookies(), cookies)
+
+# Загрузка cookie на сайт для авторизации (после повторного входа):
+for cookie in pickle.load(open('cookies.pkl', 'rb')):
+    selenium.add_cookie(cookie)
+
+# Обновляем страницу, куки подгружаются и происходит авторизация:
+selenium.refresh()
+
+
+
