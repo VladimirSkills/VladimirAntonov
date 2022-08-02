@@ -616,4 +616,54 @@ for cookie in pickle.load(open('cookies.pkl', 'rb')):
 selenium.refresh()
 
 
+"""Selenium WebDriver"""
+
+"""
+Тест на Selenium мы запускаем, указывая в команде запуска путь к драйверу:
+Команда: pytest -v --driver Chrome --driver-path tests\chromedriver.exe tests\test_vkontakt.py::test_VK
+А можно добавить импорт: from selenium import webdriver
++ Путь к драйверу: selenium = webdriver.Chrome(r'C:\Users\PC\...\chromedriver.exe')
+Здесь можно также указать: selenium = webdriver.Chrome() - тоже будет работать...
+И в команде не нужно будет указывать путь к драйверу:
+Новая команда: pytest -v --driver Chrome tests\test_vkontakt.py::test_VK
+"""
+
+
+# Чтобы окно браузера (при использовании фикстуры) закрывалось также и при Failed можно, по аналогии с записью в файл,
+# воспользоваться конструкцией with as:
+@pytest.fixture(autouse=True)
+def testing():
+    with webdriver.Chrome() as driver:
+        # Переходим на страницу авторизации
+        driver.get('http://petfriends.skillfactory.ru/')
+
+        yield driver
+        driver.quit()
+
+def test_show_my_pets(testing):  # фикстуру добавляем в аргумент функции
+    driver = testing  # транспортируем драйвер из фикстуры
+    # ... продолжение кода
+
+"""
+Явные ожидания, типа: WebDriverWait(driver, 10).until(EC.title_contains("PetFriends"))
+Примеры использования методов по явным ожиданиям можно найти через поиск в Google:
+В поиске указываем: "webdriverwait selenium python example title_contains" -> "title_contains" - название метода
+В результатах поиска ищите сайт: https://python.hotexamples.com/... Там будут хорошие примеры по искомому методу...
+
+Неявное ожидание -> driver.implicitly_wait(10) ->  больше применимо именно для загрузки страницы (со всеми элементами),
+чем для ожидания загрузки одного элемента, на который тратится меньше секунды времени.
+"""
+
+"""
+ЛОКАТОРЫ.
+Трюк №5: Поиск вложенных элементов & XPath
+Чтобы найти предка элемента, необходимо добавить команду ancestor::tag-name в выражение XPath. Например, выражение:
+$x('//input[@type="button"]/ancestor::form') -> найдёт все формы, в которые вложен элемент input с типом button.
+
+Для желающих открывать новое, есть хорошее решение для поиска элементов: BeautifulSoup – парсинг HTML в Python.
+https://python-scripts.com/beautifulsoup-html-parsing#atribute-name-text
+(См. вариант, в котором содержится текст: 'В данном примере выводится содержимое элементов, в которых есть строка 
+с символами BSD' - сделайте поиск на странице по этому тексту и найдёте нужный пример кода)
+"""
+
 
