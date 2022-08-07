@@ -484,6 +484,16 @@ def test_delete_first_pet_negative(pet_id):
 # https://selenium-python.readthedocs.io/api.html
 
 """
+Чтобы обновить Selenium или другую библиотеку, интереснее это сделать в файле requirements.txt, в котором описываются
+все зависимости приложения.
+Можно использовать команду: 'pip freeze > requirements.txt' в Terminal для создания/обновления файла requirements.txt.
+Место установки файла - корневая директория, т.е. команду лучше запускать находясь в ней.
+Доустанавливать библиотеки в файл впоследствии можно командой: 'pip install -r requirements.txt'
+Библиотеки, у которых есть обновления, подчёркиваются в файле. Наводите на них мышью и появляется ссылка на обновление.
+"""
+
+
+"""
 import logging  # Логгирование. Для вывода ответа в консоли
 logger = logging.getLogger("имя запускаемого файла")  # -> для вывода ответа в консоль
 Также прописываем в файл pytest.ini следующий код для работы метода getLogger:
@@ -667,3 +677,8 @@ https://python-scripts.com/beautifulsoup-html-parsing#atribute-name-text
 """
 
 
+"""Как вставить/подгрузить картинку в Selenium"""
+# Находим локатор на картинку:
+get_photo = selenium.find_element(By.ID, "photo")
+# Подгружаем картинку с компа:
+get_photo.send_keys(r'C:\Users\PC\...\image.jpg')
