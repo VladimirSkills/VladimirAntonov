@@ -6,7 +6,7 @@
 Добавьте в программу поиск максимального значения и его вывод на экран."""
 from decimal import Decimal
 
-per_cent = {'ТКБ': 5.6, 'СКБ': 5.9566, 'ВТБ': 4.2858, 'СБЕР': 4.0}
+per_cent = {'ТКБ': 5.6, 'СКБ': 3.9, 'ВТБ': 4.28, 'СБЕР': 4.05}
 money = int(input("Введите сумму вклада в рублях: "))
 b1 = per_cent.get('ТКБ')
 b2 = per_cent.get('СКБ')
@@ -24,18 +24,21 @@ print("Deposit =", deposit)
 print("Максимальная сумма, которую вы можете заработать —", max(deposit), "руб.")
 
 print("\nИЛИ ЭДАК:")
-def num_format(num_x): # числовой формат:
-    n = Decimal(str(num_x))
+
+
+def numformat(num):
+    n = Decimal(str(num))
     number = n.quantize(Decimal("1.00"))
     formi = '{0:,}'.format(number).replace(',', ' ')
     return formi
 
-j = per_cent.items()
+
 for i in per_cent:
     p = per_cent[i] / 100 * money
     for j in per_cent:
         if j == i:
-            print(f'Доход {num_format(p)} по ставке {round(per_cent.get(i), 2)}% в банке: {j}')
+            print(f'Доход {numformat(p)} по ставке {round(per_cent.get(i), 2)}% в банке: {j}')
 maxi = max(per_cent.values()) / 100 * money
 bank = max(per_cent, key=per_cent.get)
-print(f'<<Лучшее предложение>> в банке {bank} с доходом: {num_format(maxi)} руб.')
+symbol = u'\u2605'
+print(f"|{symbol*3}|Лучшее предложение: в банке {bank} с доходом: {numformat(maxi)} руб.")
