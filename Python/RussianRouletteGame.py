@@ -22,6 +22,7 @@ The game variations of "Russian roulette" are:
 """
 
 import random
+import winsound  # звуки есть в папке sounds на GitHub
 import time
 
 
@@ -55,10 +56,16 @@ def russian_roulette_classic():
 
                 # Сравниваем, что номер патронника для выстрела совпадает с номером, где находится патрон:
                 if shot == bullet_chamber_numbers or shot in bullet_chamber_numbers:
-                    print(f"\u27A4 Выстрел!  || Патронник № {shot}")
+                    print(f"\u27A4 Выстрел! 💥 || Патронник № {shot}")
+                    # Зареалим выстрел и пошумим...))
+                    time.sleep(0.5)
+                    file_shot = 'sounds/shot.wav'
+                    winsound.PlaySound(file_shot, winsound.SND_FILENAME)
                 else:
-                    print(f"Промах! \u263B || Патронник № {shot}")
-
+                    print(f"Пустой! \u263B || Патронник № {shot}")
+                    time.sleep(0.5)
+                    file_empty = 'sounds/empty.wav'
+                    winsound.PlaySound(file_empty, winsound.SND_FILENAME)
                 break
         except ValueError:
             print("Нужно ввести количество патронов от 1 до 6!")
@@ -113,12 +120,21 @@ def russian_roulette_misfire():
 
                 # Сравниваем, что номер патронника для выстрела совпадает с номером, где находится патрон:
                 if shot == bullet_chamber_numbers or shot in bullet_chamber_numbers and shot != misfire:
-                    print(f"\u27A4 Выстрел!  || Патронник № {shot}")
+                    print(f"\u27A4 Выстрел! 💥 || Патронник № {shot}")
+                    # Зареалим выстрел и пошумим...))
+                    time.sleep(0.5)
+                    file_shot = 'sounds/shot.wav'
+                    winsound.PlaySound(file_shot, winsound.SND_FILENAME)
                 elif shot == misfire and int(misfire) in bullet_chamber_numbers:
                     print(f"Осечка! \u2764 || Патронник № {shot}")
+                    time.sleep(0.5)
+                    file_misfire = 'sounds/misfire.wav'
+                    winsound.PlaySound(file_misfire, winsound.SND_FILENAME)
                 else:
-                    print(f"Промах! \u263B || Патронник № {shot}")
-
+                    print(f"Пустой! \u263B || Патронник № {shot}")
+                    time.sleep(0.5)
+                    file_empty = 'sounds/empty.wav'
+                    winsound.PlaySound(file_empty, winsound.SND_FILENAME)
                 break
         except ValueError:
             print("Нужно ввести количество патронов от 1 до 6!")
@@ -177,7 +193,7 @@ def russian_roulette_pair_misfire():
                 while True:
                     # Крутим барабан:
                     print("Крутим барабан...")
-                    time.sleep(2)
+                    time.sleep(1)
                     if count % 2 != 0:  # Если нечётный, то первый.
                         print(f"Стрелок 1 спускает курок!")
                     else:
@@ -186,15 +202,24 @@ def russian_roulette_pair_misfire():
                     shot = random.choice(range(1, 7))
                     # Сравниваем, что номер патронника для выстрела совпадает с номером, где находится патрон:
                     if shot in bullet_chamber_numbers and shot != misfire + bullet:
-                        time.sleep(1)
-                        print(f"\u27A4 Выстрел!  || Патронник № {shot}")
+                        print(f"\u27A4 Выстрел! 💥 || Патронник № {shot}")
+                        # Зареалим выстрел и пошумим...))
+                        time.sleep(0.5)
+                        file_shot = 'sounds/shot.wav'
+                        winsound.PlaySound(file_shot, winsound.SND_FILENAME)
                         break
                     elif shot == misfire and int(misfire) + bullet in bullet_chamber_numbers:
                         print(f"Осечка! \u2764 || Патронник № {shot}")
+                        time.sleep(0.5)
+                        file_misfire = 'sounds/misfire.wav'
+                        winsound.PlaySound(file_misfire, winsound.SND_FILENAME)
                         # После разового срабатывания осечки, делаем номер патронника с осечкой невалидным:
                         bullet += 6
                     else:
                         print(f"Пустой! \u263B || Патронник № {shot}")
+                        time.sleep(0.5)
+                        file_empty = 'sounds/empty.wav'
+                        winsound.PlaySound(file_empty, winsound.SND_FILENAME)
                     count += 1
                 print(f"Конец игры \u2620 на {count} выстреле!")
                 break
