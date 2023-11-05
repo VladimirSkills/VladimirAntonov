@@ -4,7 +4,7 @@
 Каждому отверстию патронника соответствует номер от 1 до 6. Патронникам с вложенными стрелком патронами, случайным
 образом будут присвоены номера. Затем среди шести чисел, соответствующих номерам патронников, будет случайным образом
 выбрано одно для выстрела. Если оно совпадёт с патронником, где вложен патрон, то появится надпись: "Выстрел",
-если нет, тогда надпись: "Промах!". Для более жизненной картины, в некоторых вариантах игры также будет иметь место
+если нет, тогда надпись: "Пустой!". Для более жизненной картины, в некоторых вариантах игры также будет иметь место
 одна Осечка! Варианты игры "Русская рулетка":
 -> Классика без осечек
 -> Игра для одного с осечкой
@@ -13,7 +13,7 @@
 In a revolver, there are 6 cartridges. The shooter must load the revolver's chamber with 1 to 6 cartridges and pull the trigger.
 Each chamber hole has a number from 1 to 6. The chambers with the loaded cartridges are randomly assigned numbers.
 Then, one number among the six numbers corresponding to the chamber numbers is randomly chosen for the shot.
-If it matches the chamber with the loaded cartridge, the message "Shot" will appear. If not, the message "Miss!".
+If it matches the chamber with the loaded cartridge, the message "Shot" will appear. If not, the message "Empty!".
 For a more realistic scenario, in some game variations, there will also be one Misfire!
 The game variations of "Russian roulette" are:
 - Classic version without misfires
@@ -22,7 +22,7 @@ The game variations of "Russian roulette" are:
 """
 
 import random
-import winsound  # звуки есть в папке sounds на GitHub
+import winsound
 import time
 
 
@@ -50,7 +50,7 @@ def russian_roulette_classic():
                 shot = random.choice(range(1, 7))
                 # Крутим барабан:
                 print("Крутим барабан...")
-                time.sleep(2)
+                time.sleep(1)
                 print(f"Стрелок спускает курок!")
                 time.sleep(1)
 
@@ -112,7 +112,7 @@ def russian_roulette_misfire():
 
                 # Крутим барабан:
                 print("Крутим барабан...")
-                time.sleep(2)
+                time.sleep(1)
                 print(f"Стрелок спускает курок!")
                 time.sleep(1)
                 # Задаём случайный выбор номера патронника в барабане для выстрела:
@@ -147,7 +147,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
 # Выберите число патронов от 1 до 6: 6
 # Патроны вложены в патронники: 3, 2, 4, 6, 1, 5
@@ -234,7 +233,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
 # Выберите число патронов от 1 до 6: 6
 # Патроны вложены в патронники: 4, 5, 6, 3, 1, 2
