@@ -21,14 +21,14 @@ The game variations of "Russian roulette" are:
 - Two-player game with a misfire
 """
 
+from Animate_Revolver import run_gif_animation_shot, run_gif_animation_empty, run_gif_animation_misfire, gunshot_sounds
 import random
-import winsound
 import time
 
 
 """
-РУССКАЯ РУЛЕТКА. Классика без осечек
-Classic version without misfires
+РУССКАЯ РУЛЕТКА. Классика без осечек с анимацией.
+Classic version without misfires with animation.
 """
 
 
@@ -56,16 +56,12 @@ def russian_roulette_classic():
 
                 # Сравниваем, что номер патронника для выстрела совпадает с номером, где находится патрон:
                 if shot == bullet_chamber_numbers or shot in bullet_chamber_numbers:
+                    # Запустим анимацию, зареалим выстрел и пошумим:
+                    run_gif_animation_shot('sounds/shot_revolver.gif', 'sounds/shot.wav')
                     print(f"\u27A4 Выстрел! 💥 || Патронник № {shot}")
-                    # Зареалим выстрел и пошумим...))
-                    time.sleep(0.5)
-                    file_shot = 'sounds/shot.wav'
-                    winsound.PlaySound(file_shot, winsound.SND_FILENAME)
                 else:
+                    run_gif_animation_empty('sounds/misfire_empty.gif', 'sounds/empty.wav')
                     print(f"Пустой! \u263B || Патронник № {shot}")
-                    time.sleep(0.5)
-                    file_empty = 'sounds/empty.wav'
-                    winsound.PlaySound(file_empty, winsound.SND_FILENAME)
                 break
         except ValueError:
             print("Нужно ввести количество патронов от 1 до 6!")
@@ -81,8 +77,8 @@ if __name__ == '__main__':
 
 
 """
-РУССКАЯ РУЛЕТКА. Игра для одного с осечкой
-Single player game with a misfire
+РУССКАЯ РУЛЕТКА. Игра для одного с осечкой. Есть анимация.
+Single player game with a misfire with animation.
 """
 
 
@@ -120,21 +116,15 @@ def russian_roulette_misfire():
 
                 # Сравниваем, что номер патронника для выстрела совпадает с номером, где находится патрон:
                 if shot == bullet_chamber_numbers or shot in bullet_chamber_numbers and shot != misfire:
+                    # Запустим анимацию, зареалим выстрел и пошумим:
+                    run_gif_animation_shot('sounds/shot_revolver.gif', 'sounds/shot.wav')
                     print(f"\u27A4 Выстрел! 💥 || Патронник № {shot}")
-                    # Зареалим выстрел и пошумим...))
-                    time.sleep(0.5)
-                    file_shot = 'sounds/shot.wav'
-                    winsound.PlaySound(file_shot, winsound.SND_FILENAME)
                 elif shot == misfire and int(misfire) in bullet_chamber_numbers:
+                    run_gif_animation_misfire('sounds/misfire_empty.gif', 'sounds/misfire.wav')
                     print(f"Осечка! \u2764 || Патронник № {shot}")
-                    time.sleep(0.5)
-                    file_misfire = 'sounds/misfire.wav'
-                    winsound.PlaySound(file_misfire, winsound.SND_FILENAME)
                 else:
+                    run_gif_animation_empty('sounds/misfire_empty.gif', 'sounds/empty.wav')
                     print(f"Пустой! \u263B || Патронник № {shot}")
-                    time.sleep(0.5)
-                    file_empty = 'sounds/empty.wav'
-                    winsound.PlaySound(file_empty, winsound.SND_FILENAME)
                 break
         except ValueError:
             print("Нужно ввести количество патронов от 1 до 6!")
@@ -148,6 +138,7 @@ def main():
 if __name__ == '__main__':
     main()
 
+
 # Выберите число патронов от 1 до 6: 6
 # Патроны вложены в патронники: 3, 2, 4, 6, 1, 5
 # Вас спасёт только Осечка!
@@ -158,8 +149,8 @@ if __name__ == '__main__':
 
 
 """
-РУССКАЯ РУЛЕТКА. Игра на двоих с осечкой
-Two-player game with a misfire
+РУССКАЯ РУЛЕТКА. Игра на двоих с осечкой. Без анимации
+Two-player game with a misfire. No animation.
 """
 
 
@@ -204,21 +195,18 @@ def russian_roulette_pair_misfire():
                         print(f"\u27A4 Выстрел! 💥 || Патронник № {shot}")
                         # Зареалим выстрел и пошумим...))
                         time.sleep(0.5)
-                        file_shot = 'sounds/shot.wav'
-                        winsound.PlaySound(file_shot, winsound.SND_FILENAME)
+                        gunshot_sounds('sounds/shot.wav')
                         break
                     elif shot == misfire and int(misfire) + bullet in bullet_chamber_numbers:
                         print(f"Осечка! \u2764 || Патронник № {shot}")
                         time.sleep(0.5)
-                        file_misfire = 'sounds/misfire.wav'
-                        winsound.PlaySound(file_misfire, winsound.SND_FILENAME)
+                        gunshot_sounds('sounds/misfire.wav')
                         # После разового срабатывания осечки, делаем номер патронника с осечкой невалидным:
                         bullet += 6
                     else:
                         print(f"Пустой! \u263B || Патронник № {shot}")
                         time.sleep(0.5)
-                        file_empty = 'sounds/empty.wav'
-                        winsound.PlaySound(file_empty, winsound.SND_FILENAME)
+                        gunshot_sounds('sounds/empty.wav')
                     count += 1
                 print(f"Конец игры \u2620 на {count} выстреле!")
                 break
@@ -233,6 +221,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 # Выберите число патронов от 1 до 6: 6
 # Патроны вложены в патронники: 4, 5, 6, 3, 1, 2
